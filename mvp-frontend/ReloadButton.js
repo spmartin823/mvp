@@ -4,6 +4,8 @@ import expo from 'expo';
 import { Components, MapView } from 'expo'; 
 import { Button } from 'react-native-elements'
 
+// this does not get used currently.
+
 export class ReloadButton extends React.Component {
   constructor(props) {
     super(props);

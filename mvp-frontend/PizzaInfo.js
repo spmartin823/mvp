@@ -6,14 +6,13 @@ import { Components, MapView } from 'expo';
 export class PizzaInfo extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this gets run')
-    this.marker = props.marker
+    this.marker = props.marker; 
     this.state = {
       modalVisible: true, 
     };
 
-    this.setModalVisable = (visible) => {
-      this.setState({modalVisible: visible})
+    this.setModalVisable = (modalVisible) => {
+      this.setState({modalVisible})
     }
 
   }

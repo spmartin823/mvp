@@ -16,14 +16,12 @@ export default class App extends React.Component {
     }
   
     this.getLocation = async () => {
-      // permission request only if there is not already state.
-      const { Location, Permissions } = expo; 
+      // permission request only if there is not already a state with location.
+      const { Location, Permissions } = expo; // ES6
       let status = await Permissions.askAsync(Permissions.LOCATION)
-      // console.log('this is the status: ', status)
       if (status.status === 'granted') {
         var location = await Location.getCurrentPositionAsync({enableHighAccuracy: true})
         this.setState({'currentLocation' : [location.coords.latitude, location.coords.longitude].join(',')})
-        // console.log(this.state.currentLocation)
       } else {
         this.setState({'currentLocation' : 'permission not granted'})
         console.error('permission not granted');
@@ -32,14 +30,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    // get MapView; 
-    
-
-    // start by getting location permission from user. 
-    // const {Location, Permissions} = Expo; 
-    // because this is async, this returns a promise. 
     this.getLocation(); 
-    
   }
 
 
@@ -59,7 +50,7 @@ export default class App extends React.Component {
           <PizzaMap currentLocation={this.state.currentLocation}/>          
 
         </View>
-    ) : (<Text>please enable location services.</Text>)
+    ) : (<Text>Please enable location services.</Text>)
   }
 }
 
@@ -69,7 +60,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     flexWrap: 'wrap', 
-
     justifyContent: 'center',
   },
 });

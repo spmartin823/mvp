@@ -17,13 +17,13 @@ export class PizzaMap extends React.Component {
     this.initialRegion = {
       latitude: this.lat,
       longitude: this.lng,
-      // change these to change zoom level
+      // change these to change initial zoom level
       latitudeDelta: 0.02,
       longitudeDelta: 0.005,
     }
     this.handleMarkerPress = (event) => {
-      console.log(event);
-      console.log('this', this)  
+      // console.log(event);
+      // console.log('this', this)  
     }
 
     this.state = {
@@ -33,13 +33,15 @@ export class PizzaMap extends React.Component {
     }
 
     this.getPizzaStoreLocations = async () => {
+
       let local = 'http://localhost:3000'
-      // need to add a process.env variable here.  
-      let extension = '/stores/near?latLng='
+      // TODO: need to add a process.env variable here. 
+      // TODO: rewrite this entire section with backticks
+      let extension = '/api/stores/near?latLng='
       let currentLocation = props.currentLocation
-      console.log(currentLocation)
+      // console.log(currentLocation)
       let completeUrl = local + extension + currentLocation; 
-      // console.log('get request url: ', completeUrl)
+      console.log('get request url: ', completeUrl)
       var storeData = await axios.get(completeUrl);
       storeData = storeData.data; 
       console.log('storeData', storeData[0])
@@ -51,20 +53,18 @@ export class PizzaMap extends React.Component {
     // this is currently delivering driving directions instead of walking directions. 
     this.getDirections = async (startLoc, destinationLoc) => { 
       try {
-          let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking`)
-          let respJson = await resp.json();
-          let points = polyline.decode(respJson.routes[0].overview_polyline.points);
-          let coords = points.map((point, index) => {
-              return  {
-                  latitude : point[0],
-                  longitude : point[1]
-              }
-          })
-          this.setState({coords: coords})
-          console.log('state changed')
-          // return coords
+        let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&mode=walking`)
+        let respJson = await resp.json();
+        let points = polyline.decode(respJson.routes[0].overview_polyline.points);
+        let coords = points.map((point, index) => {
+          return  {
+            latitude : point[0],
+            longitude : point[1]
+          }
+        })
+        this.setState({coords})
       } catch(error) {
-          console.error(error) 
+        console.error(error) 
       }
     }
   }
@@ -98,6 +98,7 @@ export class PizzaMap extends React.Component {
             }}
             image = {icon}
             onPress = {() => {
+              console.log('this is what is passed to getDirections: ', this.currentLocation, marker.locationGeometry.join(','))
               this.getDirections(this.currentLocation, marker.locationGeometry.join(','))
             }}
           > 

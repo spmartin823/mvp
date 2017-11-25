@@ -1,13 +1,16 @@
 {
   "name": "mvpapi",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "",
-    "start": "nodemon server.js"
+  "description": "Find the closest dollar pizza place (NYC only)",
+  "engines": {
+    "node": "9.2.0", 
+    "npm": "5.5.x"
   },
-  "author": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon api/server.js"
+  },
+  "author": "seamus martin",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.12.1"
@@ -15,9 +18,10 @@
   "dependencies": {
     "@google/maps": "^0.4.5",
     "@mapbox/polyline": "^0.2.0",
+    "axios": "^0.17.1",
     "express": "^4.16.2",
     "google-distance-matrix": "^1.0.0",
-    "mongoose": "^4.12.6",
+    "mongoose": "^4.13.4",
     "react-native-maps": "^0.17.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"

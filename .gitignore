@@ -1,0 +1,7 @@
+# ignores google maps key and mongoDB crednetials
+./keys**
+./node_modules
+
+mvpAPI/node_modules/
+mvpAPI/api/keys**
+mvpAPI/api/node_modules/
